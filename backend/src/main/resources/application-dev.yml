@@ -1,0 +1,4 @@
+# Opt-in only. Exact hostnames; never enable this profile on an exposed server.
+sentinel:
+  security:
+    approved-local-hosts: ${APPROVED_LOCAL_HOSTS:localhost,127.0.0.1,::1}

@@ -1,0 +1,3 @@
+package dev.sentinel.checking;
+
+public enum FailureReason { HTTP_ERROR, TIMEOUT, DNS_FAILURE, CONNECTION_FAILURE, TLS_FAILURE, BLOCKED_DESTINATION, NETWORK_ERROR }

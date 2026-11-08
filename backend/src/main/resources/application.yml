@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: sentinel
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/sentinel}
+    username: ${DB_USER:sentinel}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:12}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  jackson:
+    deserialization:
+      accept-float-as-int: false
+    serialization:
+      write-dates-as-timestamps: false
+  lifecycle:
+    timeout-per-shutdown-phase: 35s
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  shutdown: graceful
+  error:
+    include-message: never
+    include-stacktrace: never
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+sentinel:
+  scheduler:
+    enabled: ${SCHEDULER_ENABLED:true}
+    workers: ${CHECK_WORKERS:4}
+    queue-capacity: ${CHECK_QUEUE_CAPACITY:16}
+    tick-ms: 1000
+    max-queue-age: 10s
+  security:
+    approved-local-hosts: []
+logging:
+  level:
+    org.springframework.web: INFO
+    org.hibernate.orm.jdbc.bind: OFF
+    org.hibernate.SQL: OFF
+    org.apache.hc.client5.http: OFF
+    org.apache.hc.core5.http: OFF
